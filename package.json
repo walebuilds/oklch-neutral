@@ -19,6 +19,12 @@
     "LICENSE",
     "CHANGELOG.md"
   ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "typecheck": "tsc --noEmit",
+    "test": "echo \"No tests yet\""
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/theolawalemi/oklch-shades.git"
