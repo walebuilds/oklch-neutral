@@ -1,5 +1,5 @@
 /**
- * oklch-shades
+ * oklch-neutral
  * ─────────────────────────────────────────────────────────────────────────────
  * Perceptually uniform neutral scale generation using OKLCH.
  * Zero dependencies. Works in Node, browser, Deno, and Figma plugins.
@@ -350,7 +350,7 @@ function resolveChroma(step: string, override?: Partial<Record<string, number>>)
  * chroma (C) at the given hue angle (H).
  *
  * @example
- * import { generateScale, HUE } from 'oklch-shades'
+ * import { generateScale, HUE } from 'oklch-neutral'
  * const sand  = generateScale(pureNeutral, { hue: HUE.sand  })
  * const slate = generateScale(pureNeutral, { hue: HUE.slate })
  */

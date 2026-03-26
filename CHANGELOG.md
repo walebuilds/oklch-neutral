@@ -2,18 +2,6 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.0.2] — 2026-03-20
-
-### Changed
-
-- Removed `src/` from published files — only `dist/`, `README.md`,
-  and `LICENSE` are now included in the install
-- Added `repository`, `bugs`, and `homepage` fields — issue tracker
-  and source links now appear correctly on the npm page
-- Expanded keywords for better discoverability on npm
-- README rewritten with hero section, badges, Why OKLCH explanation,
-  full API reference, and Style Dictionary integration example
-
 ## [1.0.0] — 2026-03-11
 
 ### Added

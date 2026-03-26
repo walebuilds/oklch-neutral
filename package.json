@@ -1,15 +1,13 @@
 {
-  "name": "oklch-shades",
-  "version": "1.0.2",
+  "name": "oklch-neutral",
+  "version": "1.0.0",
   "description": "Perceptually uniform neutral scales with WCAG 2.1 and APCA contrast auditing.",
   "type": "module",
   "main": "dist/index.js",
-  "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js",
+      "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
     }
   },
@@ -27,12 +25,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/theolawalemi/oklch-shades.git"
+    "url": "git+https://github.com/walebuilds/oklch-neutral.git"
   },
   "bugs": {
-    "url": "https://github.com/theolawalemi/oklch-shades/issues"
+    "url": "https://github.com/walebuilds/oklch-neutral/issues"
   },
-  "homepage": "https://olawalemi.com",
+  "homepage": "https://github.com/walebuilds/oklch-neutral#readme",
   "author": "Olawale Balo — Product Designer + Design Engineer",
   "license": "MIT",
   "keywords": [

@@ -1,15 +1,15 @@
-<h1 align="center">oklch-shades</h1>
+<h1 align="center">oklch-neutral</h1>
 
 <h3 align="center">
   Perceptually uniform neutral scales with WCAG 2.1 and APCA contrast auditing.
 </h3>
 
 <p align="center">
-  By <a href="https://x.com/theolawalemi">@theolawalemi</a> — Product Designer + Design Engineer
+  By <a href="https://github.com/walebuilds">@Olawale Balo</a> — Product Designer + Design Engineer
 </p>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/oklch-shades"><img src="https://img.shields.io/npm/v/oklch-shades?color=20C55C&label=oklch-shades" alt="npm version" /></a>&nbsp;
+  <a href="https://www.npmjs.com/package/oklch-neutral"><img src="https://img.shields.io/npm/v/oklch-neutral?color=20C55C&label=oklch-neutral" alt="npm version" /></a>&nbsp;
   <img src="https://img.shields.io/badge/license-MIT-20C55C" alt="MIT license" />&nbsp;
   <img src="https://img.shields.io/badge/TypeScript-strict-20C55C" alt="TypeScript strict" />&nbsp;
   <img src="https://img.shields.io/badge/Dependencies-0-20C55C" alt="Zero dependencies" />
@@ -17,11 +17,11 @@
 
 ---
 
-## What is oklch-shades?
+## What is oklch-neutral?
 
 Most color scale tools let you pick a hue and nudge RGB or HSL values. The problem: HSL lightness is not perceptually uniform, so your AA boundary shifts unpredictably across hues, and the toned variants feel visually inconsistent with the original.
 
-oklch-shades works entirely in the OKLCH color space. It keeps L (lightness) identical per step, same perceived brightness, guaranteed, then introduces a small, tapered chroma at a fixed hue angle. You get warm and cool toned neutrals where the WCAG boundary stays locked and every step looks exactly as bright as its source.
+oklch-neutral works entirely in the OKLCH color space. It keeps L (lightness) identical per step, same perceived brightness, guaranteed, then introduces a small, tapered chroma at a fixed hue angle. You get warm and cool toned neutrals where the WCAG boundary stays locked and every step looks exactly as bright as its source.
 
 Built for design system authors, token pipeline builders, and Figma plugin developers who need accessible, perceptually sound neutral scales without pulling in a color science framework.
 
@@ -31,14 +31,14 @@ Built for design system authors, token pipeline builders, and Figma plugin devel
 
 HSL's lightness channel is a lie. 50% HSL yellow looks dramatically brighter than 50% HSL blue, the eye responds differently to different wavelengths at the same mathematical lightness.
 
-OKLCH is perceptually uniform: equal L steps look equal to the human eye across the entire hue range. That's why Tailwind v4, Radix UI, and Linear all moved to OKLCH for their color systems. oklch-shades gives you the same color science in a zero-dependency library that runs anywhere, Node, browser, Deno, Figma plugins.
+OKLCH is perceptually uniform: equal L steps look equal to the human eye across the entire hue range. That's why Tailwind v4, Radix UI, and Linear all moved to OKLCH for their color systems. oklch-neutral gives you the same color science in a zero-dependency library that runs anywhere, Node, browser, Deno, Figma plugins.
 
 ---
 
 ## Install
 
 ```bash
-npm i oklch-shades
+npm i oklch-neutral
 ```
 
 ---
@@ -48,7 +48,7 @@ npm i oklch-shades
 Generate a slate scale and audit it for WCAG compliance in three lines:
 
 ```ts
-import { generateScale, auditScale, firstPassingStep, HUE } from 'oklch-shades'
+import { generateScale, auditScale, firstPassingStep, HUE } from 'oklch-neutral'
 
 const gray = {
   "0":   "#FFFFFF",
@@ -92,7 +92,7 @@ const boundary = firstPassingStep(slate)
 | `HUE.mauve` | 310° | Purple-adjacent — lavender, editorial |
 
 ```ts
-import { generateScale, HUE } from 'oklch-shades'
+import { generateScale, HUE } from 'oklch-neutral'
 
 const sand  = generateScale(gray, { hue: HUE.sand  })
 const rose  = generateScale(gray, { hue: HUE.rose  })
@@ -151,7 +151,7 @@ Drop a generated scale directly into a Style Dictionary token build:
 
 ```js
 // build-tokens.js
-import { generateScale, HUE } from 'oklch-shades'
+import { generateScale, HUE } from 'oklch-neutral'
 import StyleDictionary from 'style-dictionary'
 
 const gray = { /* your pure neutral scale */ }
@@ -216,10 +216,10 @@ auditScale(scale: NeutralScale, background?: string): ScaleAudit[]
 //   step: string
 //   hex: string
 //   oklch: { l: number; c: number; h: number }
-//   contrast: number
-//   passAA: boolean
-//   passAALarge: boolean
-//   passAAA: boolean
+//   contrast: {
+//     wcag21: { ratio: number; passAA: boolean; passAALarge: boolean; passAAA: boolean }
+//     apca:   { lc: number; lcAbs: number; passBodyText: boolean; passLargeText: boolean; passUIElement: boolean; passPlaceholder: boolean }
+//   }
 // }
 ```
 
@@ -247,7 +247,7 @@ Returns `null` if no step passes.
 Combined WCAG 2.1 + APCA audit in one call. The right function when you need both standards at once.
 
 ```ts
-contrastAudit(foreground: string, background?: string): ContrastAuditResult
+contrastAudit(foreground: string, background?: string): ContrastResult
 
 const result = contrastAudit('#71767B', '#FFFFFF')
 
@@ -290,7 +290,7 @@ apcaLc('#FFFFFF', '#0A0A0A')  // → -104.0 Lc — light on dark
 Full APCA audit — returns Lc value plus all threshold checks.
 
 ```ts
-apcaAudit(foreground: string, background?: string): APCAAuditResult
+apcaAudit(foreground: string, background?: string): APCAResult
 
 // {
 //   lc: number
@@ -309,7 +309,7 @@ apcaAudit(foreground: string, background?: string): APCAAuditResult
 Full WCAG 2.1 audit — contrast ratio plus all level checks.
 
 ```ts
-wcagAudit(foreground: string, background?: string): WCAGAuditResult
+wcagAudit(foreground: string, background?: string): WCAGResult
 
 // {
 //   ratio: number
@@ -424,4 +424,4 @@ Every toned step that passes AA does so at the same perceptual lightness as the 
 
 ## License
 
-MIT © [Olawale Balo](https://x.com/theolawalemi)
+MIT © [Olawale Balo](https://github.com/walebuilds)

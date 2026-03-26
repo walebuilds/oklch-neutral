@@ -1,5 +1,5 @@
 /**
- * oklch-shades
+ * oklch-neutral
  * ─────────────────────────────────────────────────────────────────────────────
  * Usage example
  * Run: node --input-type=module examples/usage.js
@@ -7,7 +7,7 @@
  */
 
 // When using after npm install:
-// import { generateScale, auditScale, firstPassingStep, HUE } from 'oklch-shades'
+// import { generateScale, auditScale, firstPassingStep, HUE } from 'oklch-neutral'
 
 // When running from source (JS equivalent):
 import {
@@ -45,8 +45,8 @@ console.log('slate-500 →', slate['500'])  // #71767B
 // ─── Audit a scale ───────────────────────────────────────────────────────────
 const audit = auditScale(slate)
 audit.forEach(({ step, hex, oklch, contrast }) => {
-  const pass = contrast.passAA ? '✓' : '✗'
-  console.log(`${pass} slate-${step.padEnd(4)} ${hex}  L=${oklch.l.toFixed(3)}  ${contrast.ratio.toFixed(2)}:1`)
+  const pass = contrast.wcag21.passAA ? '✓' : '✗'
+  console.log(`${pass} slate-${step.padEnd(4)} ${hex}  L=${oklch.l.toFixed(3)}  ${contrast.wcag21.ratio.toFixed(2)}:1`)
 })
 
 // ─── Find the AA text boundary ───────────────────────────────────────────────
